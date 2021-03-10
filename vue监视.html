@@ -1,0 +1,33 @@
+<html>
+<head>
+	<title></title>
+</head>
+<style type="text/css">
+</style>
+<script src="./script/Vue.min.js"></script>
+<body>
+<div id="main">
+	零件编码<input type="text" v-model="nno">
+	零件名称<input type="text" v-model="na1">
+</div>
+</body>
+<script type="text/javascript">
+	var man=new Vue({ 
+		el:"#main",
+		data:{
+			nno:"",
+			na1:""
+		},
+		// 使用watch 原来监控 data中数值的变化
+		watch:{
+			nno:function(v1,v2){
+				console.log('老的值:'+v1)
+				console.log('旧的值:'+v2)
+			}
+		},
+		methods:{
+			
+		}
+	})
+</script>
+</html>
