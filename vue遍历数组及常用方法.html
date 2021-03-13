@@ -9,7 +9,7 @@
 <div id="main">
 	
 	<ul>
-		<li v-for="(data,key) in booklist">
+		<li v-for="(data,index) in booklist" :key="data.id">
 			<input type="checkbox" v-model="checkgroup" :value="data"/>
 			{{data}}
 		</li>
@@ -24,9 +24,9 @@
 		data:{
 			checkgroup:[],
 			booklist:[
-			{name:"哈利波特",num:10,price:100},
-			{name:"窗边的小豆豆",num:2,price:50},
-			{name:"解忧杂货店",num:5,price:50}
+			{name:"哈利波特",num:10,price:100,id:3},
+			{name:"窗边的小豆豆",num:2,price:50,id:4},
+			{name:"解忧杂货店",num:5,price:50,id:1}
 			]
 		},
 		computed:{
