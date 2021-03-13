@@ -1,0 +1,43 @@
+<html>
+<head>
+	<title></title>
+</head>
+<style type="text/css">
+</style>
+<script src="./script/Vue.min.js"></script>
+<body>
+<div id="main">
+	
+	<ul>
+		<li v-for="(data,key) in booklist">
+			<input type="checkbox" v-model="checkgroup" :value="data"/>
+			{{data}}
+		</li>
+	</ul>
+	{{checkgroup}}
+	<div>总金额计算: {{getsum}}</div>
+</div>
+</body>
+<script type="text/javascript">
+	var man=new Vue({ 
+		el:"#main",
+		data:{
+			checkgroup:[],
+			booklist:[
+			{name:"哈利波特",num:10,price:100},
+			{name:"窗边的小豆豆",num:2,price:50},
+			{name:"解忧杂货店",num:5,price:50}
+			]
+		},
+		computed:{
+			getsum(){
+				var sum=0;
+				for(var i=0 in this.checkgroup){
+					sum+=this.checkgroup[i].num*this.checkgroup[i].price
+				}
+				return sum
+			}
+		}
+	})
+</script>
+</html>
