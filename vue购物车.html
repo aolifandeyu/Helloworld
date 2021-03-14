@@ -1,0 +1,244 @@
+<html>
+<head>
+	<title></title>
+</head>
+<style type="text/css">
+</style>
+<script src="./script/Vue.min.js"></script>
+<body>
+<style type="text/css">
+	body{font-family:Helvetica;}
+	#main_car{
+		width:100%;
+		max-width: 1000px;
+		height:auto;
+		margin:auto;
+		padding:0px 6px 0px 6px	;
+		background-color:#fffdfc;
+		
+	}
+	#main_car_top{
+		height: auto;
+		margin-bottom:10px;
+	}
+	.main_car_top_left{
+		float:left;
+		font-size:35px;
+	}
+	.main_car_top_right{
+		float:right;
+	}
+	.main_car_top_bottom{
+		clear:both;
+		font-size:25px;
+		color:#6b6b6b;
+		background-color: white;
+	}
+	#main_car_center{
+		height:auto;	
+	}
+	.main_car_center_ul{
+		list-style-type: none;
+		margin: 0px;
+		padding: 0px;
+	}
+	#main_car_center_ul_li{
+		width:100%;
+		background-color:#ffffff;
+		margin-top:10px;	
+		border:1px solid #e8e4e4;
+		border-radius:5px;
+		height:300px;
+		padding-top:20px;
+		padding-bottom:20px;
+	}
+
+	.main_car_center_ul_li_1{
+		float: left;
+		width:6%;
+		height:100%;
+	}
+	.main_car_center_ul_li_2{
+		float: left;
+		text-align: center;
+		margin-right: 10px;
+		border-radius:5px;
+		width:25%;
+		height:250px;
+	}
+	.main_car_center_ul_li_2 img{
+		width:100%;
+		height:100%;
+		border-radius:5px;
+	}
+	.main_car_center_ul_li_3{
+		float: left;
+		height: auto;
+		font-size:20px;
+		overflow: hidden;
+		width:65%;
+	}
+	#main_car_bottom
+	{
+		bottom: 0;
+		border:1px solid  #e8e4e4;
+		height:30px;
+		padding:10px;
+		clear: both;
+		overflow: hidden;
+		
+	}
+	.main_car_bottom_1{
+		float: left;
+	}
+	.main_car_bottom_2{
+		float: right;
+	}
+</style>
+<div id="main_car">
+	<div id="main_car_top">
+			<div class="main_car_top_left">购物车</div>
+			<div class="main_car_top_right" >
+				<input type="button" value="管理" @click="changstatus('mgr')" name="">
+			</div>
+			<div class="main_car_top_bottom">共{{booklist.length}}件宝贝</div>
+	</div>
+	<div id="main_car_center" v-if="booklist.length>0">
+		<ul class="main_car_center_ul">	
+			<li v-for="(data,index) in booklist" :key="data.id" id="main_car_center_ul_li">
+				<div class="main_car_center_ul_li_1">
+					<input type="checkbox" v-model="checkgroup" :value="data" @change="selectone()" />
+				</div>
+				<div class="main_car_center_ul_li_2">
+					 <img :src="data.img"> 
+				</div>
+				<div class="main_car_center_ul_li_3">
+					<div>{{data.name}}</div>
+					<div style="height:40px;"></div>
+					<div>
+						<span style="color: red;font-size:35px;float: left;">￥{{ data.price }}</span>
+					 	<span style="float: right;"><input type="button" name="btnadd" value="+" @click="numadd(data)">[{{data.num}}]<input type="button" name="btndel" value="-" @click="numdel(data)"></span>
+					</div>
+
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div  v-else>
+		<H3 style="text-align: center;">您的购物车啥都没有啦</H3>
+	</div>
+	<!-- <div style="height:100px;text-align: center;width:auto;line-height:100px;">333</div> -->
+	<div id="main_car_bottom">
+		<div class="main_car_bottom_1">
+			<input type="checkbox" name="checkall" v-model="checkall" @change="selectall()">全选
+		</div>
+		<!-- 已添加书籍：{{checkgroup}} -->
+		<!-- <div>总数量: {{getnum}}</div> -->
+		<div class="main_car_bottom_2" >
+			<span v-if="!status.mgrstatus">合计: {{getsum}} <input type="button" value="结算" name=""></span>
+			<span v-else>
+					<input type="button" value="删除" name="" @click="bookdel()">
+					<input type="button" value="完成" name="" @click="status.mgrstatus=false">
+			</span>
+		</div>
+		<!-- <div :class="status.mgrstatus?'show':'hidden'"><input type="button" value="删除" name="" @click="bookdel()"></div> -->
+	</div>
+</div>
+	
+
+</body>
+<script type="text/javascript">
+	var man=new Vue({ 
+		el:"#main_car",
+		data:{
+			status:{
+				mgrstatus:false
+			},
+			checkall:false,
+			checkgroup:[],
+			booklist:[
+			{name:"哈利·波特》（Harry Potter）是英国作家J·K·罗琳（J. K. Rowling）于1997～2007年所著的魔幻文学系列小说，共7部。其中前六部以霍格沃茨魔法学校（Hogwarts School of Witchcraft and Wizardry）为主要舞台，描写的是主人公——年轻的巫师学生哈利·波特.",num:2,price:100,id:1,img:"./images/book1.jpg"},
+			{name:"《窗边的小豆豆》是日本作家、主持人黑柳彻子创作的儿童文学作品，首次出版于1981年。这本书讲述了作者上小学时的一段真实的故事",num:1,price:50,id:2,img:"./images/book5.jpg"},
+			{name:"《解忧杂货店》是日本作家东野圭吾写作的长篇小说。2011年于《小说野性时代》连载，于2012年3月由角川书店发行单行本。该书讲述了在僻静街道旁的一家杂货店，",num:1,price:50,id:3,img:"./images/book3.jpg"},
+			{name:"《就想开间小小咖啡馆》是2012年5月中信出版社出版的图书，作者是王森，人称森哥。定价在36元。该书讲述了主人公想开一间咖啡馆的故事。",num:1,price:150,id:4,img:"./images/book4.jpg"},
+			//{name:"Vue从入门到放弃",num:1,price:300,id:5,img:"./images/book1.jpg"},
+			{name:"《稻盛和夫》 自传，1932年1月30日出生于日本鹿儿岛县鹿儿岛市，鹿儿岛大学工学部毕业。27岁创办京都陶瓷株式会社（现名京瓷Kyocera），52岁创办第二电信（原名DDI，现名KDDI，目前在日本为仅次于NTT的第二大通讯公司），这两家公司又都在他的有生之年进入世界500强，两大事业皆以惊人的力道成长",num:2,price:30,id:6,img:"./images/book2.jpg"}
+			]
+		},
+		methods:{
+			changstatus:function(str){
+				if(str=="mgr"){
+					this.status.mgrstatus=true
+				}
+			},
+			//删除元素
+			bookdel:function(){     
+				 if(this.checkgroup.length==0){
+				 	alert("您还没有选择宝贝哦")
+				 	return
+				 }
+				 if (confirm("确认将这"+this.checkgroup.length+"个宝贝删除?")) {  
+            		for(var i=0;i< this.checkgroup.length;i++)
+					{				
+						console.log(this.checkgroup[i].name)
+						for (var b = 0;b< this.booklist.length;b++) {
+							if(this.booklist[b].id==this.checkgroup[i].id){
+								///console.log(this.booklist[b].index)
+								this.booklist.splice(this.booklist.indexOf(this.booklist[b]),1)	
+								console.log('del'+this.booklist.length)
+								console.log('del'+this.checkgroup.length)
+							}
+						}
+					}	
+					this.checkgroup=[]		
+					this.checkall=false;
+					this.status.mgrstatus=false;	
+       			 }  
+
+			},
+			selectone:function(){
+				if(this.checkgroup.length==this.booklist.length){this.checkall=true}
+				else{this.checkall=false}
+			},
+			selectall:function(){
+				if(!this.checkall){
+					this.checkgroup=[]
+				}
+				else{
+					this.checkgroup=[]
+					//this.checkgroup=this.booklist
+					//因为实际上并不是新建一个和原对象(数组也是对象)完全一样的对象，而是把原对象的内存地址直接复制给了另一个对象，也就是说两个对象都是指向同一个内存地址，所以实际上它们就是同一个对象。
+					this.checkgroup=[].concat(this.booklist)
+					// for(var data in this.booklist){
+					// 	this.checkgroup.push(this.booklist[data]);
+					// }
+					console.log(this.checkgroup)
+				}
+			},
+			numadd:function(data){
+				data.num++
+
+			},
+			numdel:function(data){
+				if(data.num>1){data.num--}	
+			}
+		},
+		computed:{
+			getsum(){
+				var sum=0;
+				for(var i=0 in this.checkgroup){
+					sum+=this.checkgroup[i].num*this.checkgroup[i].price
+				}
+				return sum
+			},
+			getnum(){
+				var sum=0;
+				for(var i=0 in this.checkgroup){
+					sum+=this.checkgroup[i].num
+				}
+				return sum
+			}
+		}
+	})
+</script>
+</html>

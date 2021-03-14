@@ -1,0 +1,62 @@
+<html>
+<head>
+	<title></title>
+</head>
+<style type="text/css">
+</style>
+<script src="./script/Vue.min.js"></script>
+<body>
+<div id="main">
+	<h1>
+		1、JS 其中内置类型:{null,undefind,number,boolean,string,object,symbol}
+	</h1>
+	<h1>又分为两大类：基本数据类型和引用数据类型：</h1>
+	<h3>基本数据类型为:number，string，boolean，null，undefind，symbol</h1>
+	<h3>引用类型为 Array，function，Data？正则表达式</h1>
+	<H1></H1>
+	<h3 style="color:red">基本数据类型：基本类型值在内存中占据固定大小，直接存储在栈内存中的数据
+引用数据类型：引用类型在栈中存储了指针，这个指针指向堆内存中的地址，真实的数据存放在堆内存里。</h3>
+
+	<h1>
+		2、typeof 对于基本类型，除了 null 都可以显示正确的类型，（对于 null 来说，虽然它是基本类型，但是会显示 object）
+	</h1>
+	<a href="https://www.cnblogs.com/zhaoduoduo/p/12777482.html">详细教程</a>
+	<input type="button" @click="test()" name="" value="测试">
+</div>
+</body>
+<script type="text/javascript">
+	var man=new Vue({ 
+		el:"#main",
+		data:{
+			nno:"",
+			na1:"",
+		},
+		computed:{
+
+		},
+		methods:{
+			test:function(){
+				//number
+				var num1=111
+				console.log(typeof(num1) )
+
+				//string
+				var str1="111"
+				console.log(typeof str1 )
+
+				// function
+				var c=function(argument) {
+					console.log(333)
+				}
+				console.log(typeof c)
+
+				var a=null
+				console.log(typeof a)
+
+				// 检查debug是否定义
+				console.log(typeof debug != 'undefind')
+			}
+		}
+	})
+</script>
+</html>

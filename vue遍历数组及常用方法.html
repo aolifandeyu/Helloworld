@@ -7,33 +7,91 @@
 <script src="./script/Vue.min.js"></script>
 <body>
 <div id="main">
-	
+	<input type="checkbox" name="checkall" v-model="checkall" @change="selectall()">
 	<ul>
 		<li v-for="(data,index) in booklist" :key="data.id">
-			<input type="checkbox" v-model="checkgroup" :value="data"/>
-			{{data}}
+			<input type="checkbox" v-model="checkgroup" :value="data" @change="selectone()"/>
+			{{data}} <span><input type="button" name="btnadd" value="+" @click="numadd(data)"></span><span><input type="button" name="btndel" value="-" @click="numdel(data)"></span>
 		</li>
 	</ul>
-	{{checkgroup}}
-	<div>总金额计算: {{getsum}}</div>
+	<div>
+		已添加书籍：{{checkgroup}}
+	</div>
+	
+	<div>总金额: {{getsum}}</div>
+	<div>总数量: {{getnum}}</div>
+	<div><input type="button" value="删除" name="" @click="bookdel()"></div>
 </div>
 </body>
 <script type="text/javascript">
 	var man=new Vue({ 
 		el:"#main",
 		data:{
+			checkall:false,
 			checkgroup:[],
 			booklist:[
-			{name:"哈利波特",num:10,price:100,id:3},
-			{name:"窗边的小豆豆",num:2,price:50,id:4},
-			{name:"解忧杂货店",num:5,price:50,id:1}
+			{name:"哈利波特",num:2,price:100,id:1},
+			{name:"窗边的小豆豆",num:1,price:50,id:2},
+			{name:"解忧杂货店",num:1,price:50,id:3},
+			{name:"就想开间小小咖啡屋",num:1,price:150,id:4},
+			{name:"Vue从入门到放弃",num:1,price:300,id:5},
+			{name:"稻盛和夫",num:2,price:30,id:6}
 			]
+		},
+		methods:{
+			//删除元素
+			bookdel:function(){
+				 if(this.checkgroup.length==0){
+				 	alert("您还没有选择宝贝哦")
+				 	return
+				 }
+				 if (confirm("确认将这"+this.checkgroup.length+"个宝贝删除?")) {  
+            		for(var i=1 in this.checkgroup)
+					{
+						for (var b = 1 in this.booklist) {
+							if(this.booklist[b].id==this.checkgroup[i].id){
+								///console.log(this.booklist[b].index)
+								this.booklist.splice(this.booklist.indexOf(this.booklist[b]),1)	
+
+							}
+						}
+					}	
+					this.checkgroup=[]			
+       			 }  
+
+			},
+			selectone:function(){
+				if(this.checkgroup.length==this.booklist.length){this.checkall=true}
+				else{this.checkall=false}
+			},
+			selectall:function(){
+				if(!this.checkall){
+					this.checkgroup=[]
+				}
+				else{
+					this.checkgroup=this.booklist
+				}
+			},
+			numadd:function(data){
+				data.num++
+
+			},
+			numdel:function(data){
+				if(data.num>1){data.num--}	
+			}
 		},
 		computed:{
 			getsum(){
 				var sum=0;
 				for(var i=0 in this.checkgroup){
 					sum+=this.checkgroup[i].num*this.checkgroup[i].price
+				}
+				return sum
+			},
+			getnum(){
+				var sum=0;
+				for(var i=0 in this.checkgroup){
+					sum+=this.checkgroup[i].num
 				}
 				return sum
 			}
