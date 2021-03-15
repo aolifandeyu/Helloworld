@@ -3,25 +3,128 @@
 	<title></title>
 </head>
 <style type="text/css">
+
+body{
+	background-color:#f6f6f6;
+}
+.top{
+	background-color: black;
+	height:40px;
+	width:100%;
+}
+
+.title{
+	width:100%;
+	background-color: white;
+	height:130px;
+	text-align: center;
+}
+.title1{
+	padding-top:25px;
+	font-size:35px;
+}
+.title2{
+	margin-top:10px;
+	font-size:15px;
+	color:#7b7b7b;
+}
+.content{
+	padding:20px;
+	width:60%;
+	margin:30px auto auto auto;
+	height:auto;
+	background-color: white;
+}
+.content1{
+	
+	font-weight:bold;
+	margin:0px 0px 25px 0px;
+	font-size:20px;
+}
+.content2{
+	line-height: 25px;
+	font-weight:bold;
+	margin-bottom:10px;
+	padding-left:20px;
+	font-size:16px;
+	color:black;
+}
+.content3{
+	line-height:30px;
+	color:#d00000;
+	padding-left:20px;
+	font-weight:bold;
+	margin-bottom:20px;
+	font-size:15px;
+	text-decoration-line:top;
+	/*color:#551a8b;*/
+}
 </style>
 <script src="./script/Vue.min.js"></script>
 <body>
 <div id="main">
-	<h1>
-		1、JS 其中内置类型:{null,undefind,number,boolean,string,object,symbol}
-	</h1>
-	<h1>又分为两大类：基本数据类型和引用数据类型：</h1>
-	<h3>基本数据类型为:number，string，boolean，null，undefind，symbol</h1>
-	<h3>引用类型为 Array，function，Data？正则表达式</h1>
-	<H1></H1>
-	<h3 style="color:red">基本数据类型：基本类型值在内存中占据固定大小，直接存储在栈内存中的数据
-引用数据类型：引用类型在栈中存储了指针，这个指针指向堆内存中的地址，真实的数据存放在堆内存里。</h3>
+	<div class="top"></div>
+	<div class="title">
+		<div class="title1">JS基本数据类型 及 == 和 === 的区别</div>
+		<div class="title2">2021.03.15</div>
+	</div>
+	<div class="content">
+		<div class="content1">
+				一、JS 内置类型有七钟:{null,undefind,number,boolean,string,object,symbol}又分为两大类：基本数据类型和引用数据类型
+		</div>
+		<div class="content2">
+			基本数据类型为 : number，string，boolean，null，undefind，symbol
+			<br>
+			引用类型为 	: Array，function，Data，正则表达式 等等
 
-	<h1>
-		2、typeof 对于基本类型，除了 null 都可以显示正确的类型，（对于 null 来说，虽然它是基本类型，但是会显示 object）
-	</h1>
-	<a href="https://www.cnblogs.com/zhaoduoduo/p/12777482.html">详细教程</a>
-	<input type="button" @click="test()" name="" value="测试">
+		</div>
+
+		<div class="content3">
+			基本数据类型：基本类型值在内存中占据固定大小，直接存储在[栈内存]中的数据
+			<br>
+			引用数据类型：引用类型在栈中存储了指针，这个指针指向堆内存中的地址，真实的数据存放在堆内存里。
+			<br>
+			<img src="./images/js1.png">
+			
+		</div>
+		<div class="content1">
+			二、typeof 对于基本类型，除了 null 都可以显示正确的类型，（对于 null 来说，虽然它是基本类型，但是会显示 object）
+				<a href="https://www.cnblogs.com/zhaoduoduo/p/12777482.html">详细教程</a> <input type="button" name="" value="测试" @click="test2()">
+		</div>
+
+		<div class="content1">
+			三、双等于号和三等于号的区别和用法 <a href="https://www.cnblogs.com/nelson-hu/p/7922731.html">详细教程 </a> <input type="button" name="" value="测试" @click="test1()">
+		</div>
+		<div class="content3">
+			<h3>双等于号:</h3>
+			(1)如果两个值类型相同，则进行值的比较 <br>
+			(2)如果两个值类型不相同，也有可能相等，如果是字符串和数值比较，把字符串转化为数值之后再作比较，null 和 undefind 相等 eg:<br>
+			<div class="content2">
+			let c="222"  <br>
+			let d=222	<br>
+			console.log(c==d)  //输出true
+			</div>
+			(3)如果是引用类型的比较，变量保存的是数据的内存地址（指针），所以不同变量如果指向不一致，是不相等的 eg :<br>
+			<div class="content2">
+			let a=[1,2,3,4];<br>
+			let b=[1,2,3,4];<br>
+			console.log(a==b) //输出false<br><br>
+
+			let a=[1,2,3,4];<br>
+			b=a<br>
+			console.log(a==b) //输出true
+			</div>
+			<h3>三等于号:</h3>
+			(1)如果类型不同，就一定不相等 eg: <br>
+			<div class="content2">
+				let c="222"<br>
+				let d=222<br>
+				console.log(c==d)  //输出true,进行了转化<br> 
+				console.log(c===d) //输出false<br>
+			</div>
+			(2)如果类型相同，则比较值是否相等 
+		</div>
+	</div>
 </div>
 </body>
 <script type="text/javascript">
@@ -35,7 +138,31 @@
 
 		},
 		methods:{
-			test:function(){
+			test1:function(){
+				//const定义变量必须赋初始值，而且变量的指向不可改变
+				const cc="123"
+				//cc="22"
+				console.log(cc);
+				let a=[1,2,3,4];
+				let b=[1,2,3,4];
+				console.log(a==b) //输出false
+				b=a
+				console.log(a==b) //输出true
+				console.log(a==b) //输出true	
+
+				let c="222"
+				let d=222
+				console.log(c==d)  //输出true
+				console.log(c===d) //输出false
+
+				let f= new String("123")
+				let h= new String("123")
+				let g="123"
+				console.log(f==h) //输出false
+				console.log(f==g) //输出true
+				console.log(f===g) //输出false
+			},
+			test2:function(){
 				//number
 				var num1=111
 				console.log(typeof(num1) )
@@ -50,11 +177,26 @@
 				}
 				console.log(typeof c)
 
+				//nul
 				var a=null
 				console.log(typeof a)
 
 				// 检查debug是否定义
 				console.log(typeof debug != 'undefind')
+
+				//很神奇的String对象，一方面可以作为基本类型，另一方面还可以作为引用类型
+				var s1=new String("SSS")
+				var s2=String("SSS")
+				var s3="SSS"
+				console.log(typeof s1)
+				console.log(typeof s2)
+				console.log(typeof s3)
+				console.log(s1==s2)
+				console.log(s2==s3)
+				console.log(s1==s3)
+				console.log(s1===s2)
+				console.log(s2===s3)
+				console.log(s1===s3)
 			}
 		}
 	})
