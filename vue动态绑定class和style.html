@@ -3,31 +3,74 @@
 	<title></title>
 </head>
 <style type="text/css">
+#main{
+	background-color:#fffdfc;
+	margin:auto;
+	width:100%;
+	font-size:18px;
+	line-height:18px;
+
+}
+.actvie{
+	color:white;
+	background-color:#a70000;
+}
+.green{
+	background-color:green;
+	color:white;
+}
+.blue{
+	background-color:#5e93d6;
+	color:white;
+}
+.addborder{
+	border:1px solid black;
+
+}
 </style>
 <script src="./script/Vue.min.js"></script>
 <body>
 <div id="main">
-	零件编码<input type="text" v-model="nno">
-	零件名称<input type="text" v-model="na1">
+	<div :class="isRed? 'actvie':''">vue-动态绑定class，三目运算写法</div><br>
+	< div :class="isRed? 'actvie':''">vue-动态绑定class，三目运算写法< /div>
+	<br><br>
+	<div :class="isGreen">vue-动态绑定class，对象写法</div><br>
+	< div :class="isGreen">vue-动态绑定class，对象写法< /div>
+	<br><br>
+	<div :class="isBlue">vue-动态绑定class，数组写法</div><br>
+	< div :class="isBlue">vue-动态绑定class，数组写法< /div>
+	<br><br><br><br>
+
+	<div :style="isBlack?'color:white;background-color:#888888':''">vue-动态绑定style，三目运算写法(1)</div><br>
+	< div :style="isBlack?'color:isWhite;background-color:#888888':''">vue-动态绑定style，三目运算写法(1)< /div>
+<!-- 	<div :style="'color:'+isRed?'red':''">vue-动态绑定style，三目运算写法(2)</div>
+	< div :style="'color:'+isRed?'color:red':''">vue-动态绑定style，三目运算写法(2)< /div> -->
+	<br><br>
+	<div :style="isYello">vue-动态绑定style，对象写法</div><br>
+	< div :style="isYello">vue-动态绑定style，对象写法< /div>
+	<br><br>
+	<div :style="isWhite">vue-动态绑定style，数组写法</div><br>
+	< div :style='isWhite'>vue-动态绑定style，数组写法< div>
 </div>
 </body>
 <script type="text/javascript">
 	var man=new Vue({ 
 		el:"#main",
 		data:{
-			nno:"",
-			na1:"",
+			isRed:true,
+			isGreen:{
+				green:true,
+				addborder:true
+			},
+			isBlue:["blue","addborder"],
+			isBlack:true,
+			isYello:{
+				 color:"black",  			  // color 加不加单引号都可以
+				'background-color':"#c3c30a",  // 带 -，如果不加单引号，需要转换为驼峰写法，不让报错	
+				 lineHeight:"20px"
+			},
+			isWhite:[{color:'white'},{'background-color':'black'}]
 		},
-		// 使用watch 原来监控 data中数值的变化
-		watch:{
-			nno:function(v1,v2){
-				console.log('老的值:'+v1)
-				console.log('旧的值:'+v2)
-			}
-		},
-		methods:{
-			
-		}
 	})
 </script>
 </html>

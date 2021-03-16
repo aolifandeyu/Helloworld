@@ -3,98 +3,129 @@
 	<title></title>
 </head>
 <style type="text/css">
+.top{
+	background-color: black;
+	height:60px;
+	width:100%;
+}
+#main{
+	font-size:18px;
+	width:80%;
+	margin:auto;
+	height: auto;
+	text-align: center;
+	padding-bottom: 50px;
+}
+ul{
+	list-style-type: none;
+}
 </style>
 <script src="./script/Vue.min.js"></script>
 <body>
-<div id="main">
-	<input type="checkbox" name="checkall" v-model="checkall" @change="selectall()">
+<div class="top"></div>
+<div id="main">	
+	
+	<h1>vue遍历数组及常用方法</h1>
+	<br>
+	2021.03.16
+	<h3>当我们在一个输入框中输入文本时，会依次触发下列事件：keydown 事件 ——> input 事件 ——> keyup 事件。</h3>
+	模糊查询（filter 方法)：<input type="textbox" name="" @input="filterbook()" v-model="findbook">
+
+	<br>
+	请你输入你喜欢的书名：<input type="textbox" name="" v-model="newbook"> <input type="button" value="点击添加(push 方法)" name="" @click="add()">
+
+	<br>
+	<input type="button" name="" value="每本书加个《》( map 方法 )" @click="addchar()">
+	<input type="button" value="其他测试" name="" @click="other()"> <a href="https://blog.csdn.net/qq_39399966/article/details/99059056">详细内容</a> 
+	
 	<ul>
-		<li v-for="(data,index) in booklist" :key="data.id">
-			<input type="checkbox" v-model="checkgroup" :value="data" @change="selectone()"/>
-			{{data}} <span><input type="button" name="btnadd" value="+" @click="numadd(data)"></span><span><input type="button" name="btndel" value="-" @click="numdel(data)"></span>
+		<li v-for="(data,index) in filterlist" :key="data">
+			<span style="width:200px;display:inline-block;">{{data}}</span><input type="button" name="" value="删除 splice 方法" @click="del(data)">
 		</li>
 	</ul>
-	<div>
-		已添加书籍：{{checkgroup}}
-	</div>
+
+	<BR>
+	<img :src="img1">
 	
-	<div>总金额: {{getsum}}</div>
-	<div>总数量: {{getnum}}</div>
-	<div><input type="button" value="删除" name="" @click="bookdel()"></div>
 </div>
 </body>
 <script type="text/javascript">
 	var man=new Vue({ 
 		el:"#main",
 		data:{
-			checkall:false,
-			checkgroup:[],
-			booklist:[
-			{name:"哈利波特",num:2,price:100,id:1},
-			{name:"窗边的小豆豆",num:1,price:50,id:2},
-			{name:"解忧杂货店",num:1,price:50,id:3},
-			{name:"就想开间小小咖啡屋",num:1,price:150,id:4},
-			{name:"Vue从入门到放弃",num:1,price:300,id:5},
-			{name:"稻盛和夫",num:2,price:30,id:6}
-			]
+			img1:"./images/js2.png",
+			filterlist:[],
+			findbook:"",
+			newbook:"",
+			booklist:["哈利波特","窗边的小豆豆","解忧杂货店","就想开间小小咖啡屋","Vue从入门到放弃","稻盛和夫"]
+		},
+		mounted:function(){
+			//console.log('11');
+			this.filterlist=[].concat(this.	booklist)
 		},
 		methods:{
-			//删除元素
-			bookdel:function(){
-				 if(this.checkgroup.length==0){
-				 	alert("您还没有选择宝贝哦")
-				 	return
-				 }
-				 if (confirm("确认将这"+this.checkgroup.length+"个宝贝删除?")) {  
-            		for(var i=1 in this.checkgroup)
-					{
-						for (var b = 1 in this.booklist) {
-							if(this.booklist[b].id==this.checkgroup[i].id){
-								///console.log(this.booklist[b].index)
-								this.booklist.splice(this.booklist.indexOf(this.booklist[b]),1)	
 
-							}
-						}
-					}	
-					this.checkgroup=[]			
-       			 }  
+			// map 遍历 返回新数组，内容可以修改
+			addchar:function(){
+				var newcc=this.filterlist.map((data)=>"《"+data+"》")
+				console.log(newcc)
+				this.filterlist=newcc;
 
 			},
-			selectone:function(){
-				if(this.checkgroup.length==this.booklist.length){this.checkall=true}
-				else{this.checkall=false}
+			// filter 过滤，返回新数组，内容包含于原数组中
+			filterbook:function(){
+				console.log("哈利波特".indexOf("利"))  //  indexOf 返回字符串下标，从0开始 此时输出1
+				this.filterlist=this.booklist.filter((data)=>data.indexOf(this.findbook.trim())>=0)
 			},
-			selectall:function(){
-				if(!this.checkall){
-					this.checkgroup=[]
+			//删除
+			del:function(data){
+				console.log(1);
+				this.filterlist.splice(this.booklist.indexOf(data),1)
+			},
+			//增加
+			add:function(){
+				console.log(this.newbook.trim());
+				if(this.newbook.trim()==""){
+					alert('请输入书名')
+					return
 				}
 				else{
-					this.checkgroup=this.booklist
+					this.filterlist.push(this.newbook.trim());
 				}
 			},
-			numadd:function(data){
-				data.num++
+			other:function(){
 
-			},
-			numdel:function(data){
-				if(data.num>1){data.num--}	
-			}
-		},
-		computed:{
-			getsum(){
-				var sum=0;
-				for(var i=0 in this.checkgroup){
-					sum+=this.checkgroup[i].num*this.checkgroup[i].price
-				}
-				return sum
-			},
-			getnum(){
-				var sum=0;
-				for(var i=0 in this.checkgroup){
-					sum+=this.checkgroup[i].num
-				}
-				return sum
-			}
+				this.filterlist.pop();							//删除最后一个元素
+				
+				this.filterlist.shift();  						//删除开头第一个元素
+
+				//this.filterlist.unshift(this.newbook.trim()); 	//开头插入一个元素
+
+				console.log(this.filterlist.slice(2,5)); 			// indexbigin 到 indexend （2,5】
+
+				console.log("1-2-3-4-5-".split('-'))  			//["1", "2", "3", "4", "5", ""]
+
+				console.log("12345".split(''))					//["1", "2", "3", "4", "5"]
+
+				console.log(this.filterlist.filter((a)=>a=="哈利波特"| a=="稻盛和夫")) //过滤：["哈利波特", "稻盛和夫"]
+
+				console.log([].concat(this.filterlist)) 			// concat 连接两个数组返回新的数组
+
+				console.log(this.filterlist.reverse()) 		    //reverse() 方法用于颠倒数组中元素的顺序。影响原数组
+
+				var a = [1,2,3,4]
+				var newdd = a.reduce(function(total, current){
+				 return total + current;
+				})
+				console.log(newdd,a)
+
+				//map		通过遍历改变数组的内容，返回新数组
+				//filter  通过遍历过滤数组，返回新数组
+				//forEach 遍历每个元素，不返回新数组，不返回新数组，不返回新数组，重要的事情说三遍。相当于for 循环
+				//reduce  累加器，reduce(function(A,B),C) C是累加的初始值，默认为0,可以省略
+			} 
+
+
 		}
 	})
 </script>
