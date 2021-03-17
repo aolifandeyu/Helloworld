@@ -7,22 +7,48 @@
 <script src="./script/Vue.min.js"></script>
 <body>
 <div id="main">
-	零件编码<input type="text" v-model="nno">
-	零件名称<input type="text" v-model="na1">
+	<h1>vur  中 watch 的 使用（handler,deep,immediate）</h1>
+	<img :src="img1" ><br>
+	零件编码 <input type="text" v-model="nno"><br>
+	零件名称 <input type="text" v-model="na1"><br>
+	学生的年龄 <input type="textbox" name="" v-model="student.age"><br>
+	学生的姓名 <input type="textbox" name="" v-model="student.name"><br>
 </div>
 </body>
 <script type="text/javascript">
 	var man=new Vue({ 
 		el:"#main",
 		data:{
+			style1:[{width:'60%'},{height:'60%'}],
+			img1:"./images/js3.png",
 			nno:"",
 			na1:"",
+			student:{
+				name:'Mike',
+				age:6,
+			}
 		},
-		// 使用watch 原来监控 data中数值的变化
+		// 使用watch,监控 data中数值的变化。 handler可以省略，在用到deep或者 immdiate 时需要，
 		watch:{
 			nno:function(v1,v2){
 				console.log('老的值:'+v1)
 				console.log('旧的值:'+v2)
+			},
+			//加不加单引号都可以
+			//参数允许为空
+			'na1':function(){
+				console.log('新值已经改变')
+			},
+			'student.age':function(v1){
+				console.log(v1)
+			},
+			student:{
+				handler(v1,v2){
+					console.log(v1)
+				},
+				//如果是监视对象的话，需要深度监听，如果是监听对象或者某个属性的话，则像上面一样不需要
+				deep:false,		//深度监听，默认值为false。
+				immediate:true, //是否在第一次绑定值监听，默认值为false。
 			}
 		},
 		methods:{

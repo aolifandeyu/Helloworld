@@ -1,0 +1,74 @@
+<html>
+<head>
+	<title></title>
+</head>
+<link rel="stylesheet" type="text/css" href="./css/helloworld.css">
+<style type="text/css">
+</style>
+<script src="./script/Vue.min.js"></script>
+<body>
+<div id="main">
+	<div class="top"></div>
+	<div class="title">
+			<div class="title1">vur 事件循环机制</div>
+			<div class="title2">2021.03.17</div>
+	</div>
+	<div class="content">
+			<div class="content3">
+				1、执行第一个（宏）任务，将其上下代码放入调用栈。（call stack），如果是同步任务，则马上执行，如果是异步操作，则开启其他线程执行异步任务，（异步回调结果会放入单独（微任务/宏任务）的队列）继续执行同步任务。
+				<br>
+				2、直到所有同步任务执行完毕（当前栈为空），会去判断微任务（microtask queue）队列是否有回调任务需要执行，有就依次将其放到调用栈中执行，如果微任务队列任务执行完了，就会去判断宏任务队列是否有任务，有就将宏任务队列中的第一个宏任务放入调用栈中执行，当一个宏任务执行完后，会再去判断当前微任务队列是否有新的微任务，有就执行，再执行宏任务队列中接下来的任务，反复循环。
+				<br>	
+				[调用栈每次执行任务时，都会走 1、2 步骤]
+				<br>		
+				[微任务类型的异步执行完毕]每次回调时，会排序到微任务队列尾部，即有可能刚刚执行完最后一个微任务，就又有一个微任务插入到微任务队列
+				<br>	
+				[宏任务类型的异步执行完毕]每次回调时，会排序到宏任务队列尾部
+				<br>
+				[如果一个promise 异步回调很久，还没放入到微任务栈，调用栈觉得微任务没有任务，则执行宏任务]</div>
+				<br>
+				<img :src="img2">
+				<br>
+				输出结果：
+				<img :src="img3">
+			</div>
+</div>
+</body>
+<script type="text/javascript">
+	var man=new Vue({ 
+		el:"#main",
+		data:{
+			style1:[{width:'60%'},{height:'60%'}],
+			img1:"./images/js3.png",
+			img2:"./images/js4.png",
+			img3:"./images/js5.png",
+			nno:"",
+			na1:"",
+			student:{
+				name:'Mike',
+				age:6,
+			}
+		},
+		mounted:function(){
+	   		this.test();
+		},
+		methods:{
+			test:function(){
+	    		  setTimeout(() => {
+	      		 	 console.log("1-1");
+	       		     Promise.resolve().then(() => {
+	         	     console.log("2-1");
+	       		 		});
+	     	 	  });
+	     		  console.log("1-2");
+	      		  Promise.resolve().then(() => {
+	        	  console.log("1-3");
+	        	  setTimeout(() => {
+	               		 console.log("3-1");
+	        	 		 });	   		  
+				});	
+			}
+		}
+	})
+</script>
+</html>
