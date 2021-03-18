@@ -1,0 +1,118 @@
+<html>
+<head>
+	<title></title>
+</head>
+<link rel="stylesheet" type="text/css" href="./css/helloworld.css">
+<style type="text/css">
+</style>
+<script src="./script/Vue.js"></script>
+<body>
+<div id="main">
+	<div class="top"></div>
+	<div class="title">
+			<div class="title1">组件的定义，父传子，子传父，Ref的使用</div>
+			<div class="title2">2021.03.18</div>
+	</div>
+	<div class="content">
+			<input type="button" @click="test()" name="" value="ref测试">
+			<div class="content2">
+			（1）：父传子，靠属性，子传父，靠事件，ref 都可以 <BR>	
+			（2）：父传子，如果非字符串类型的传递，需要加上冒号，字符串类型，不需要加上冒号。<BR>
+			（3）：组件加上 ref 属性，使用 this.$refs.childmsg.message 可以获取对应组件的信息<BR>
+			 <div class="content3">< allmsg msg="测试中，由父类传送过来的" :isshow="true" :numss="100" ref="childmsg"></ allmsg></div>
+			（3）：父传子，属性验证 Number,String,Boolean,Array,Obeject。【vue.min.js】不验证<BR>
+			 <div class="content3">
+						props:{
+							msg:String,
+							isshow:Boolean,
+							numss:Number
+						}
+			 </div>
+			（4）：组件分为局部组件和全局组件。组件定义时，区分大小写 (首字母除外)。Html 不区分大小写<BR>
+			 <div class="content3">
+			 	组件:'ChildMsg'，M大写，以下只有第一个识别到时组件 (Html 驼峰写法)：<BR>
+			 	< child-msg msg="测试下，由父类传送过来的">< /child-msg><BR>
+			 	< childmsg msg="测试下，由父类传送过来的">< /childmsg><BR>
+			 	< childMsg msg="测试下，由父类传送过来的">< /childMsg>
+			 </div>
+			(5)全局组件 <BR><BR>
+			<img :src="img1"><BR><BR>
+			(6)全局组件<BR><BR>
+			<img :src="img2">
+			</div>
+	</div>
+
+	<!-- 父传子，如果属性是布尔类型或者数字类型，或者是父类的data时，需要加上冒号，普通字符串不需要加上冒号。 -->
+	<allmsg msg="测试中，由父类传送过来的" :isshow="true" :numss="100" ref="childmsg"></allmsg>
+	<child-msg msg="测试下，由父类传送过来的"></Child-msg>
+	
+</div>
+</body>
+<script type="text/javascript">
+	//重点二：全局定义组件，组件名称首字母可以大写，其他字母不能小写
+	Vue.component('Allmsg',{
+		template:`
+			<div style='border:1px solid black;width:500px;min-height:50px;height:auto;background-color:white;font-size:15px;margin:auto'>
+				{{message}}
+				{{numss}}
+				<div style="padding-left:50px;" >
+					<span v-show="isshow">{{msg}}</span>
+				</div>
+			</div>
+		`,
+		//重点三：props 接受父类传送过来的值
+		//props:["msg","isshow"],
+		//属性验证  Number,String,Boolean,Array,Obeject
+		//如果 是 vue.min.js 的话，则不会提示
+		props:{
+			msg:String,isshow:Boolean,numss:Number
+		},
+		data(){
+			return{
+				message:"全局温馨提示"
+			}
+		}
+		// data:function(){
+		// 	return {
+		// 		message:"1234"
+		// 	}
+		// }
+	})
+	var man=new Vue({ 
+		el:"#main",
+		data:{
+			img1:"./images/js3181.png",
+			img2:"./images/js3182.png",
+			nno:'1234'
+		},
+		
+		//局部子组件
+		components:{
+			'ChildMsg':{
+				template:
+				`
+					<div style='border:1px solid black;width:500px;min-height:50px;height:auto;background-color:white;font-size:15px;margin:auto'>
+						{{message}}
+						<div style="padding-left:50px;" ref="childmsg2">
+							{{msg}}
+						</div>
+					</div>
+				`,
+				props:["msg"],
+				data(){
+					return{
+						message:"局部温馨提示"
+					}
+				}
+			}
+		},
+		methods:{
+			test(){
+				console.log('123',this.$refs)
+				console.log(this.$refs.childmsg.message)
+			}
+		}
+	})
+
+</script>
+</html>
