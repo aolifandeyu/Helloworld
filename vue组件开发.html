@@ -11,7 +11,7 @@
 	<div class="top"></div>
 	<div class="title">
 			<div class="title1">组件的定义，父传子，子传父，Ref的使用</div>
-			<div class="title2">2021.03.18</div>
+			<div class="title2" >2021.03.18</div>
 	</div>
 	<div class="content">
 			<input type="button" @click="test()" name="" value="ref测试">
@@ -35,16 +35,21 @@
 			 	< childmsg msg="测试下，由父类传送过来的">< /childmsg><BR>
 			 	< childMsg msg="测试下，由父类传送过来的">< /childMsg>
 			 </div>
-			(5)全局组件 <BR><BR>
+			 (5) :子传父使用 $emit	<BR>
+			 <div class="content3">
+			 		子组件的方法中调用：this.$emit("myevent",[传递的值]) <br>
+			 		myevent绑定在子组件使用的地方,test()为父组件的方法：< child-msg msg="测试下，由父类传送过来的" @myevent="test($event)">< /Child-msg>
+			  </div>
+			(6)全局组件 <BR><BR>
 			<img :src="img1"><BR><BR>
-			(6)全局组件<BR><BR>
+			(7)全局组件<BR><BR>
 			<img :src="img2">
 			</div>
 	</div>
 
 	<!-- 父传子，如果属性是布尔类型或者数字类型，或者是父类的data时，需要加上冒号，普通字符串不需要加上冒号。 -->
 	<allmsg msg="测试中，由父类传送过来的" :isshow="true" :numss="100" ref="childmsg"></allmsg>
-	<child-msg msg="测试下，由父类传送过来的"></Child-msg>
+	<child-msg msg="测试下，由父类传送过来的" @myevent="test"></Child-msg>
 	
 </div>
 </body>
@@ -89,12 +94,13 @@
 		//局部子组件
 		components:{
 			'ChildMsg':{
+				//ES6字符串模板
 				template:
 				`
 					<div style='border:1px solid black;width:500px;min-height:50px;height:auto;background-color:white;font-size:15px;margin:auto'>
 						{{message}}
 						<div style="padding-left:50px;" ref="childmsg2">
-							{{msg}}
+							{{msg}} <input type='button' value="调用父组件的方法" @click="test2()">
 						</div>
 					</div>
 				`,
@@ -103,11 +109,19 @@
 					return{
 						message:"局部温馨提示"
 					}
+				},
+				methods:{
+					test2(){
+						console.log('子组件调用方法');
+						this.$emit("myevent",1235)
+					}
 				}
+
 			}
 		},
 		methods:{
-			test(){
+			test(ev){
+				console.log(ev)
 				console.log('123',this.$refs)
 				console.log(this.$refs.childmsg.message)
 			}

@@ -1,0 +1,65 @@
+<html>
+<head>
+	<title></title>
+</head>
+<link rel="stylesheet" type="text/css" href="./css/helloworld.css">
+<style type="text/css">
+</style>
+<script src="./script/Vue.min.js"></script>
+<body>
+<div id="main">
+	<div class="top"></div>
+	<div class="title">
+			<div class="title1">vue 插槽 slot</div>
+			<div class="title2">2021.03.19</div>
+	</div>
+
+	<div class="content">
+		<div class="content3">
+			1、混合父组件的内容与子组件的模板（能在组件具体位置中插入html代码）  -->内容分发  <BR>
+			2、（子传父）父组件模板的内容在父组件作用域内编译，子组件模板的内容在子组件作用域内编译<BR>
+			3、以后写组件的时候，比如是轮播组件，利用 slot 和 组件的 props 属性，封装一个通用性强的组件
+		</div>
+
+		<child>
+			<div>我是普通的插槽slot里面的内容</div>
+			<div slot="slot1" @click="test()"> 我是具名插槽 1,点击我还能调用父类的方法，弹窗哦 </div>
+			<div slot="slot2">我是具名插槽 2</div>
+		</child>
+		 <BR>源码：<br><br>
+		 <img :src="img1">
+	</div>
+
+</div>
+</body>
+<script type="text/javascript">
+	Vue.component('child',{
+		template:`
+		<div>
+			<h1>我是子组件 child</h1>
+			<h2 @click="test2()">
+			<slot></slot>
+			<slot name='slot1'></slot>
+			<slot name='slot2'></slot>
+			</h2>
+		</div>
+		`,
+		methods:{
+			test2(){
+				alert('子组件弹窗')
+			}
+		}
+	})
+	var man=new Vue({ 
+		el:"#main",
+		data:{
+			img1:'./images/js3191.png'
+		},
+		methods:{
+			test(){
+				alert('父组件弹窗，再也不用使用 $emit 了')
+			}
+		}
+	})
+</script>
+</html>

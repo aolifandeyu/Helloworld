@@ -1,0 +1,80 @@
+<html>
+<head>
+	<title></title>
+</head>
+<link rel="stylesheet" type="text/css" href="./css/helloworld.css">
+<style type="text/css">
+</style>
+<script src="./script/Vue.min.js"></script>
+<body>
+<div id="main">
+	<div class="top"></div>
+	<div class="title">
+			<div class="title1">vue [keep-alive] 和 [component]的使用</div>
+			<div class="title2" >2021.03.19</div>
+	</div>
+	<div class="content">
+		
+		<!-- <component  is="index1"></component> -->
+
+			<div class="content2">（1）、< component >元素，动态绑定多个组件到它的is属性上面:<br></div>
+			<div class="content3">
+			 	< component  is="index1">< /component> <br>
+				< component :is="who">< /component><br>
+			</div>
+			<div class="content2">（2）、< keep-alive > 保留状态，避免重新渲染：<br></div>
+			<div class="content3">
+				< keep-alive><br>
+					< component :is="who">< /component><br>
+				< /keep-alive><br>
+			</div>
+			 <H2>例子:点击列表切换组件</H2>
+			<keep-alive>
+				<component :is="who"></component>
+			</keep-alive>
+
+			<footer>
+			<ul>
+				<LI @click="who='index1'">首页</LI>
+				<LI @click="who='index2'">列表页</LI>
+				<LI @click="who='index3'">购物车页</LI>
+				<LI @click="who='Allmsg'">全局组件局部组件都能切换，你点我试试</LI>
+			</ul>
+			</footer>		
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+	// component is ，就算是 全局组件也能调用
+	Vue.component('Allmsg',{
+	template:`
+		<div style='border:1px solid black;width:500px;min-height:50px;height:auto;background-color:white;font-size:15px;margin:auto'>
+			<h1>全局组件</h1>
+		</div>
+	`,
+	})
+
+	Vue.component()
+	var man=new Vue({ 
+		el:"#main",
+		data:{
+			who:"index1"
+		},
+		methods:{
+			
+		},
+		components:{
+			'index1':{
+				template:`<div><h1>首页-搜索框 <input type='textbox'></h1></div>`
+			},
+			'index2':{
+				template:`<div><h1>列表页-搜索框 <input type='textboxtextbox'></h1></div>`
+			},
+			'index3':{
+				template:`<div><h1>购物车页-搜索框 <input type='textbox'></h1></div>`
+			},
+
+		}
+	})
+</script>
+</html>
