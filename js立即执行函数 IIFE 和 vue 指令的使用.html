@@ -1,0 +1,90 @@
+<html>
+<head>
+	<title></title>
+</head>
+<link rel="stylesheet" type="text/css" href="./css/helloworld.css">
+<style type="text/css">
+</style>
+<script src="./script/Vue.min.js"></script>
+<body>
+<div id="main">
+	<div class="top"></div>
+	<div class="title">
+			<div class="title1">JS 立即执行函数 IIFE 和 Vue 指令的使用</div>
+			<div class="title2" >2021.03.29</div>
+	</div>
+	<div class="content">
+		<H2>(1)IIFE (Immediately Invoked Function Expression)：</H2>
+		IIFE 立即调用的函数表达式，可以用来模拟块级作用域，防止变量污染<br>
+		通常写法：！function(II){}(I)<br>
+		<div v-color="'red'">作用：创建一个独立的作用域，这个作用域的变量，外面访问不到，避免变量污染<br></div><br>
+		<img src="./images/js03291.png" width="100%" height="500">
+		<H2>(2)vue 指令 ：</H2>
+			<div v-color="'blue'">1/ 指令也有其生命周期：inserted(dom创建的时候执行)，update（更新） 等</div>
+			<div v-color="'blue'">2/ 指令是自定义的，能够像 ref 一样获取元素，进行 dom 操作，不同的是，指令能够一旦加上，马上执行相应处理。</div>
+			<div v-color="'blue'">3/指令绑定的值，可以是字符，也可以是变量，也可以是数组</div><br>
+			<img src="./images/js0329.png" width="100%" height="400">
+	</div>
+
+
+
+</div>
+</body>
+<script type="text/javascript">
+
+	Vue.directive("color",{
+		inserted(el,bind){
+			console.log(el);
+			console.log(bind);
+			console.log(el.style.color=bind.value)
+		},
+		update(){
+			console.log(11)
+		}
+	})
+	// setTimeout("alert(1)",1000)
+	Vue.component()
+	var man=new Vue({ 
+		el:"#main",
+		data:{
+			nno:'123'
+		},
+		methods:{
+			
+		}
+	})
+
+	function test(){
+
+		!function(ii){
+			console.log("立即执行函数:",ii)
+		}(1)
+
+		//setTimeout，参数一 可以是JS的表达式，双引号括起来。也可以是方法
+
+		//不加iife ，打印出 5 5 5 5 5 ，因为几秒之后，i已经被变量污染了
+		for(var	 i=0;i<5;i++){
+			setTimeout(()=>{
+				console.log(i)	
+			},1000*i)				
+		}	
+
+		//换成 es6 中的 let 每隔一秒打印出1、2、3、4、5
+		for(let	 i=0;i<5;i++){
+			setTimeout(()=>{
+				console.log(i)	
+			},1000*i)				
+		}	
+		
+		//或者使用 IIFE 每隔一秒打印出1、2、3、4、5
+		for(var i=0;i<5;i++){
+			!function(ii){
+				setTimeout(()=>console.log(ii),1000*ii)	
+			}(i)
+				
+		}	
+	}
+
+
+</script>
+</html>
