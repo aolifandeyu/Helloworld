@@ -1,0 +1,43 @@
+<html>
+<head>
+	<title></title>
+</head>
+<link rel="stylesheet" type="text/css" href="./css/helloworld.css">
+<style type="text/css">
+</style>
+<script src="./script/Vue.min.js"></script>
+<body>
+<div id="main">
+	<div class="top"></div>
+	<div class="title">
+			<div class="title1">Hoisting 声明提升</div>
+			<div class="title2" >2021.03.31</div>
+	</div>
+	<div class="content">
+		<div class="content2">
+			JavaScript 中，函数以及变量的声明都将被提升到函数的最顶部
+			JavaScript 中，变量可以在使用后声明，也就是说变量可以先使用再声明
+			但是注意 初始化声明不会提升：即 var x=5，这样不会提升
+			<img src="./images/js03312.png">
+		</div>
+	</div>
+
+
+
+</div>
+</body>
+<script type="text/javascript">
+
+	cc='我是后面声明的变量'
+
+	console.log(cc)
+	var cc			//变量会被提升到最前面去
+
+	test('我是后面声明的方法')
+	
+	//方法会被提升到最前面去
+	function test(name) {
+		console.log(name)
+	}
+</script>
+</html>

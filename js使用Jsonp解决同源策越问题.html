@@ -1,0 +1,52 @@
+<html>
+<head>
+	<title></title>
+</head>
+<link rel="stylesheet" type="text/css" href="./css/helloworld.css">
+<style type="text/css">
+</style>
+<script src="./script/Vue.min.js"></script>
+<body>
+<div id="main">
+	<div class="top"></div>
+	<div class="title">
+			<div class="title1">Jsonp解决同源策略(同源/跨域)</div>
+			<div class="title2" >2021.03.31</div>
+	</div>
+	<div class="content">
+		<div class="content1">
+			如果两个网址拥有相同的协议，域名，和端口，那么这两个网址就属于同一个源，其中只要
+			有一个不相同，就是不同源
+		</div>		
+		<div class="content3">
+				jsonp 是 json with padding 的缩写，它不属于 Ajax 请求，但它可以模拟 Ajax 请求，原理如下
+				<br>
+				（1）因为前端引用 script 标签 是支持跨域的，所以我们把需要请求的数据的服务器地址 比如 xxx 用
+				< script src='xxx' > 引入，并且，前端必须要定义某个包含参数的方法 eg: test(data),其实data为你等下需要获取的远程数据 
+				<br>
+				（2）服务器端 xxx 响应数据必须是一个函数的调用 test('需要传递的数据')，真正要发送给客户端的数据需要作为函数调用的参数 
+				<br>
+				（3）所以当 引入 < script > 时，test(data)方法被调用。
+
+		</div>
+			<a href="https://blog.csdn.net/chenshanqiang/article/details/103896197">详细教程可以看这里</a>
+
+	</div>
+
+
+
+</div>
+</body>
+<script type="text/javascript">
+	Vue.component()
+	var man=new Vue({ 
+		el:"#main",
+		data:{
+			nno:'123'
+		},
+		methods:{
+			
+		}
+	})
+</script>
+</html>

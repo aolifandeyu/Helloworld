@@ -1,0 +1,63 @@
+<html>
+<head>
+	<title></title>
+</head>
+<link rel="stylesheet" type="text/css" href="./css/helloworld.css">
+<style type="text/css">
+</style>
+<script src="./script/Vue.min.js"></script>
+<body>
+<div id="main">
+	<div class="top"></div>
+	<div class="title">
+			<div class="title1">JS apply，call，bind</div>
+			<div class="title2" >2021.03.31</div>
+	</div>
+	<div class="content">
+		<div class="content2">
+		Applly 方法用于劫持另一个对象的方法，继承另一个对象的属性  <BR>
+		pen.toString.apply(book,['记录知识']) <BR>
+		book对象劫持了pen对象的toString方法。这样book对象就不用去new一个了 <BR>
+		book替换了pen 原型（父类）的this。<BR><BR>
+		</div>
+		<div class="content2">
+		apply 和 call 和 bind 都是用来重新定义this这个对象的
+		区别在于调用时不同：<BR>
+		1/通过call()调用函数时,必须在括号中详细地列出每个参数.<BR>
+		2/通过apply()动态地调用函数时,需要以数组形式一次性传入所有调用参数. <BR>
+		</div>
+		<div class="content3">
+			pen.toString.apply(book,['记录知识']) --第二个参数为数组 <BR> 
+ 			pen.toString.call(book,'记录知识')	   --第..个参数为字符 <BR>
+  			pen.toString.bind(book,'记录知识')()  --参数同 call，只是后面需要加括号调用<BR>	 
+		</div>
+		<img src="./images/js03311.png">
+	</div>
+
+
+
+</div>
+</body>
+<script type="text/javascript">
+var name='张志鸿'
+class Tool{
+   	constructor(name){
+   		this.name=name
+   	}
+   	toString(work){	
+   		//采用字符串模板的方式输出变量
+   		//var c=`${this.name} 作用: ${work}`
+   		//alert(c)
+   		console.log(`${this.name} 作用: ${work}`)
+   	}
+   }
+
+   var book={name:"书籍"}
+   var pen=new Tool("铅笔")
+   //pen.toString();
+   pen.toString.apply(book,['记录知识'])
+   pen.toString.call(book,'记录知识')
+   pen.toString.bind(book,'记录知识')()
+   pen.toString('用于写字')
+</script>
+</html>
