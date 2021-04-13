@@ -40,6 +40,12 @@
 </body>
 <script type="text/javascript">
 var name='张志鸿'
+var test=function(parm){
+	console.log(this)
+	console.log(1)
+	alert(parm)
+}
+test.call(name,'script')
 class Tool{
    	constructor(name){
    		this.name=name
@@ -54,10 +60,10 @@ class Tool{
 
    var book={name:"书籍"}
    var pen=new Tool("铅笔")
-   //pen.toString();
-   pen.toString.apply(book,['记录知识'])
-   pen.toString.call(book,'记录知识')
-   pen.toString.bind(book,'记录知识')()
-   pen.toString('用于写字')
+   pen.toString();
+   //pen.toString.apply(book,['记录知识'])
+ //  pen.toString.call(book,'记录知识')
+ //  pen.toString.bind(book,'记录知识')()
+ //  pen.toString('用于写字')
 </script>
 </html>

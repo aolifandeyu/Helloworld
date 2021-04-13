@@ -1,0 +1,39 @@
+--for xml path() 能够将查询的多行结果，用xml文档形式，(一段字符串)返回回来。这个有什么用呢?
+
+--比如说我们在group by 的时候，对于那些字符型字段，我们是只能取max(),如果使用 for xml path() 就够将字符合并返回。
+
+要注意2个点:
+第一个点就是使用 for xml path() 的时候,如果你字段不加任何处理(去空格或者合并字符串),默认是将数据用 字段名括起来的。
+如果做了处理,则会去掉书名号。这样的话,你如果想要返回结果不包含xml格式,就可以做到了
+第二个点是path,path()是段落分隔符吧.path()参数,默认是空白.如果有值的话,会作为每一行的父标签
+
+
+
+
+
+
+
+
+SELECT '[ '+hName+' ]' FROM @hobby FOR XML PATH('')
+
+FOR XML PATH('')
+
+--返回结果是一段中文字符
+--如果字段什么都不加修饰，则字段左右默认加上字段名称标签<nno></nno>
+
+SELECT '@'+nno FROM TBSADA where paper='XS19000070' group by nno FOR XML PATH('')
+--<nno>2222</nno><nno>33032-26010</nno> <nno>44110-30352</nno>
+
+SELECT '@'+rtrim(PAPER),'!'+rtrim(nno) FROM TBSADA where paper='XS19000070' group by paper,nno FOR XML PATH('')
+@XS19000070!2222@XS19000070!33032-26010@XS19000070!44110-30352
+
+SELECT '@'+nno FROM TBSADA where paper='XS19000070' group by nno FOR XML PATH('')
+@2222                          @33032-26010                   @44110-30352                   
+
+SELECT '@'+nno+'!' FROM TBSADA where paper='XS19000070' group by nno FOR XML PATH('')
+@2222                          !@33032-26010                   !@44110-30352                   !
+
+select paper,newnno from (
+select paper,newnno=(SELECT rtrim(nno)+' , '   FROM TBSADA where paper=a.paper group by nno FOR XML PATH(''))  from
+tbsada a  group by paper
+) zz where zz.paper='XS19000070'

@@ -3,6 +3,7 @@
 	<title></title>
 </head>
 <link rel="stylesheet" type="text/css" href="./css/helloworld.css">
+<script type="module" src="./script/test.js"></script>
 <style type="text/css">
 </style>
 <script src="./script/Vue.min.js"></script>
@@ -10,30 +11,31 @@
 <div id="main">
 	<div class="top"></div>
 	<div class="title">
-			<div class="title1">A</div>
-			<div class="title2" >2021.03.18</div>
+			<div class="title1">ES6模块化</div>
+			<div class="title2" >2021.04.11</div>
 	</div>
 	<div class="content">
+		<div class="content3">
+			ES6模块需要搭建服务器才能使用，import 导入 export 导出<br>
 
-	</div>
+			以前的前端的模块化使用的是 commandJs 和 AMD的 前者用于服务器后者用于浏览器。<br>
 
+			而 commandjs和AMD的模块导入，只能是运行时确定，而且是在缓存中获取模块对象。【运行时加载】<br>
+
+			ES6 模块的设计思想，是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量。【编译时加载】<br>
+			export {firstName, lastName, year}; <br>
+
+			import {firstName, lastName, year} from './profile';<br>
+
+		</div>
+			</div>
 
 
 </div>
 </body>
-<script type="text/javascript" type="module">
+<!-- <script type="module">
+  import utils from "./js/test.js";
 
-import x from 'test.js'
-
-	Vue.component()
-	var man=new Vue({ 
-		el:"#main",
-		data:{
-			nno:'123'
-		},
-		methods:{
-			
-		}
-	})
-</script>
+  // other code
+</script> -->
 </html>

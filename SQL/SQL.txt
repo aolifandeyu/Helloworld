@@ -1,0 +1,112 @@
+﻿重庆权路-路虎   v8cqql.longsky.com,5566   cqql   newqpgl_cqqllh   7B5tAU+9+6
+
+v8gzjf.longsky.com,5566   gzjf   newqpgl_gzjf   B#H5k4W#Z8 
+
+BGP   西安德昱   182.254.208.47   xady   newqpgl_xady   3a6JYMh%T5
+
+大兴二群   SERVER=218.17.29.162,15667;UID=sa;PWD=DX@longsky123;DATABASE=newqpgl
+
+杭州亚奥   v8hzya.longsky.com,5566   hzya   newqpgl_hzya   A2U$/A%Zr9
+
+   杭州凯晏   v8hzky.longsky.com,5566   hzky   newqpgl_hzky   ABCabc88108820
+
+凯晏外帐   115.159.161.233,5566   hzkywz   newqpgl_wz   Z3Ym4#T2U$
+
+广州延信   118.89.17.201,5566   gzyanxin   newqpgl_gzyx_v8   Yan13527638442xin
+
+BGP   杭州德昱   182.254.208.47  hzdyuser   newqpgl_hzdy   b36*sg75jz
+
+景峰 jingfengwuliu.gnway.cc sa    newqpgl_bz gzjf@longsky
+
+兴旺 157.122.243.34,5566  sa   gdxw@longsky
+
+佛山东升祥盈   119.29.84.122,5566   fsdsxy   newcar_fsdsxy   482R9TX7
+
+云南尚配   v8ynsp.longsky.com,5566   ynsp   newqpgl_ynsp   9WS#37$NaS
+
+广州吉野  119.29.84.122 gzjynewqpgl_gzjy gzjy0812  gzjy
+
+广州玛速玛   v8gzmsm.longsky.com,5566   gzmsmuser   newqpgl_gzmsm   C!vd9*A72+T
+
+广州合盈   v8gzhy.longsky.com,5566   gzhyuser  newqpgl_gzhy   Uq7P3)4*sH9#
+
+长远开发部 cydn  kfb   y29ZHM5C+y newqpgl_kfb
+
+成都宝和   v8cdbh.longsky.com,5566   cdbh   newqpgl_cdbh_bh   AE9xF+4d5C 测试维修接待图片上传
+
+广州宝狮昆明   v8gzbs.longsky.com,5566   gzbs   newqpgl_km   by2012bs
+
+合肥连配通 (申合sh)  115.159.220.175,5566  hflpt   newqpgl_hflpt   6A4tBVZ9+7
+
+杭州佳旺  v8hzjw.longsky.com,5566  hzjw  newqpgl_hzjw   L9#T5J*m3E
+
+boss系统 v8/v8car/v8longsky  密码：longsky
+
+广州恒配   v8gzhengp.longsky.com,5566   gzhengpei   newqpgl_gzhengpei   z#C7Y*g<9M2
+
+爱车在线：ip：120.77.9.15,5566 数据库名：newqpgl_aiche 用户：aiche_user 密码：ac3#Long48 sa密码：L1o2n3g4s5k6y7 
+
+济南英冠  182.254.141.93  jnyguser  newqpgl_jnyg   WE#3p2BQ9q*
+
+鑫动力  115.159.201.181  xdluser  hbljs1168  071600A
+
+佛山俊山  182.254.183.81  fsjsuser  newqpgl  js11*05fo
+
+重庆权路-路虎   v8cqql.longsky.com,5566   cqql   newqpgl_cqqllh   7B5tAU+9+6
+
+青岛世泰   v8qdst.longsky.com,5566   qdst   newqpgl_qdst   7B6uCW+A$8
+
+成都启阳   v8cdqy.longsky.com,5566   cdqyuser   newqpgl_cdqyjt   A9x#U5*dD6y/7
+
+昆山汉智   47.100.113.89,5566 newqpgl sa  hz@longsky1
+
+长远微信 外部测试    www.longsky.com  trial    newqpgl  dc(tyd$kj69@f3
+长远销售系统    www.longsky.com  trial    car_test  dc(tyd$kj69@f3
+
+长远boss设置： server=120.24.67.136;database=newqpglv9_sys;uid=super_user;pwd=K#K8qaE#*N
+
+
+长远微信设置: 123.207.97.58 wx_user  Dh#7eq&39A
+
+select connection from wx_sys_gzhinfo
+select * from tbExecuteConfig where ExecName
+
+山东泰安红星机器厂  
+
+昆山汉智   47.100.113.89,5566 newqpgl sa  hz@longsky1
+
+联盟测试 (广州)   v8lmtest.longsky.com,5566   lmtest   newqpgl_lm_gz   Zd6VAVn*S$
+联盟测试 (广州)   v8lmtest.longsky.com,5566   lmtest   newqpgl_lm_sz   Zd6VAVn*S$
+联盟测试 (广州)   v8lmtest.longsky.com,5566   lmtest   newqpgl_lm_sh   Zd6VAVn*S$
+
+长远：v8user,v8longsky
+
+创建索引
+create [unique] index idname on tabname(col )
+创建主键
+create table tablename add primary key(列)
+
+
+查询软件版本：select top 1 prg_date,* from tbupdate (nolock)order by id desc
+
+
+服务平台账户密码
+S34
+237950589
+
+QQ账号和密码：
+
+3004735054
+Zzh123456	
+
+服务器账号和密码:
+
+zzh
+zzh3736
+
+
+boss 系统
+V8car
+longsky
+
+

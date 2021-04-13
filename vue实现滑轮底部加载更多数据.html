@@ -1,0 +1,90 @@
+<html>
+<head>
+	<title></title>
+</head>
+
+<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="./css/helloworld.css">
+<style type="text/css">
+</style>
+<script src="./script/Vue.min.js"></script>
+<body>
+<div id="main">
+	<table class="table Owntable table-bordered table-hover">
+		<thead>
+			<td style="width:150px;">零件编码</td><td>零件名称</td><td>库存数量</td><td>售价</td><td>进价</td><td>库号</td><td>仓位</td>
+		</thead>
+		<tr v-for="(data,id) in list" :key="id">
+			<td style="width:150px;">{{data.nno}}</td><td>{{data.na1}}</td><td>{{data.kcamount}}</td><td>{{data.oprc}}</td><td>{{data.iprc}}</td><td>{{data.depotno}}</td><td>{{data.posi}}</td>
+		</tr>
+	</table>
+
+	<div v-show="!scloll" class="load">
+		<img src="./images/loading.gif" width="50px" height="50px"><br><br>加载中....
+	</div>
+	
+</div>
+</body>
+<script type="text/javascript">
+	Vue.component()
+	var man=new Vue({ 
+		el:"#main",
+		data:{
+			list:[],
+			nno:'123',
+			pz:10,
+			pi:1,
+			scloll:true
+
+		},
+		created:function(){
+				this.getpeoplelist()
+				window.onscroll = () => {
+					//当当前屏幕的高度 加上 滑轮的上边距 大于 整个页面的高度-10，时，说明已经接近底部，此时加载数据
+					if (((document.body.clientHeight + document.body.scrollTop) > (document.body.scrollHeight-10)) && this.scloll)
+					{
+						//this.scloll 开个控制是否执行下方代码
+						this.scloll = false;
+						//使用setTimeout 缓存下时间
+						setTimeout(()=>{
+							this.getpeoplelist()
+						},100)
+						
+					}
+			}
+		},
+		methods:{
+			getpeoplelist:function(){
+				fetch('http://localhost:8888/web/api/list?type=10002&pz=100&pi='+this.pi).then((response)=>response.json()).then((date)=>{
+					this.list = this.list.concat(eval(date.data));	
+					this.scloll=true
+				})
+				this.pi++;
+			},
+		}
+	})
+</script>
+<style>
+	.load{
+		position: fixed ;
+		right: 50%;
+ 	    bottom: 50%;
+		width:50px;
+		height:80px;
+		font-size:10px;
+		text-align: center;	
+	}
+	td{
+		display: inline-block;
+		height:30px;
+		width: 100px;
+		overflow-y:hidden;
+		overflow-x:hidden;
+		
+	}
+	.Owntable{
+		width:auto;
+		margin: auto;
+	}
+</style>
+</html>
