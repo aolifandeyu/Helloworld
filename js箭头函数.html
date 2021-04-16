@@ -1,0 +1,66 @@
+<html>
+<head>
+	<title></title>
+</head>
+<link rel="stylesheet" type="text/css" href="./css/helloworld.css">
+<style type="text/css">
+</style>
+<script src="./script/Vue.min.js"></script>
+<body>
+<div id="main">
+	<div class="top"></div>
+	<div class="title">
+			<div class="title1">箭头函数和普通函数 this 的指向问题 </div>
+			<div class="title2" >2021.04.16</div>
+	</div>
+	<div class="content">
+		<div class="content2">
+		箭头函数：一句话概括，es6箭头函数里的this指的是定义这个函数时外层代码的this，这句话可以从两个方面理解：
+
+		（1）es6箭头函数没有自己的this
+		（2）es6箭头函数里的this是外层代码（定义时，非执行时）this的引用
+		（3）apply 无效
+
+		<BR>
+		<BR>
+		普通函数：this 对象是在运行时基于函数的执行环境绑定的：在全局函数中，this指向的是window；当函数被作为某个对象的方法调用时，this就等于那个对象
+
+		比如： ① class 函数最终 return 一个方法方法中有 console.log(this) 这个方法如果在全局调用 t.func()()，此时 打印的this=window
+		② setTimeout 的 this 指向全局
+
+		</div>
+		<!-- <input type="button" value="test" onclick="test()"/> -->
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+	var name='全局'
+	var age=1001
+
+	function say(name){
+		this.name=name
+		this.func=function(){
+			setTimeout(function(){
+				console.log(this.name)
+			}, 1);
+		}
+		this.func1=function(){
+			console.log(this.name);
+		}
+		this.func2=function(){
+			setTimeout(()=>console.log(this.name), 1);
+		}
+		this.func4=()=>console.log(this.name)
+	}
+
+	 var student={name:'hi'}
+	 var t2=new say('局部')
+
+	// t2.func()  //全局
+	// t2.func2() //局部
+	// t2.func.apply(student)  //全局
+	// t2.func1.apply(student) //hi
+	// t2.func2.apply(student) //hi
+	// t2.func4.apply(student) //局部
+</script>
+</html>

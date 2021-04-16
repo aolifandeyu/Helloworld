@@ -1,0 +1,108 @@
+<html>
+<head>
+	<title></title>
+</head>
+<link rel="stylesheet" type="text/css" href="./css/helloworld.css">
+<style type="text/css">
+</style>
+<script src="./script/Vue.min.js"></script>
+<body>
+<div id="main">
+	<div class="top"></div>
+	<div class="title">
+			<div class="title1">Js和Vue一些基础知识</div>
+			<div class="title2" ref="title2" >2021.04.14</div>
+	</div>
+	<div class="content">
+		<h3>js数字转化为字符：num+'' 加上单引号即可</h3>
+		<h3>js字符转化为数字：parseInt('111'),如果转化失败 返回 NaN</h3>
+		<h3>js判断是否为数字:isNaN(parseInt('d') == false </h3>
+		<H3>js判断类型：typeof</H3>
+		<h3>js获取当前日期：var d=new Date() </h3>
+		<H3>js获取时间戳：d.getTime()</H3>
+		<h3>js获取焦点：document.getElementById("input1").focus()</h3>
+		<input type="textbox" name="" id="input1"><input type="button" value="测试" @click="test1" name="">
+		<h3>js文本框默认值：placeholder</h3>
+		<H3>js获取html内容：元素.innerHTML</H3>
+		<H3>js弹窗询问,返回布尔类型：console.log(confirm("确认删除吗?"))</H3>
+		<h3>js获取数组长度：arr.length</h3>
+		<H3>js是否包含某元素：indexOf</H3>
+		<h3>js获取屏幕宽高：document.body.clientHeight</h3>
+		<h3>js获取滑轮上边距：document.body.scrollTop</h3>
+		<h3>js获取页面总高度：document.body.scrollHeight</h3>
+
+		<h3>js 设置屏幕自适应：< meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" >  </h3>
+
+		<div class="content3">	
+		<h3>css margin-top 影响父级：父级加上 overflow:hidden</h3>
+		<H3>css margin-top：30% 会获取父元素的宽度。</H3>
+		<h3>css设置图片渐变:background-image: linear-gradient(to bottom,#3079bd,#e6e6e6); </h3>
+		<H3>css 透明： background:transparent;</H3>
+		<H3>css 设置图片：  background: url('../assets/loginbg.png') no-repeat;</H3>
+		<H3>css 设置高度自适应： height:100vh;</H3>
+		<H3>css 设置圆角： border-radius:5px;	</H3>
+		<H3>css 背景透明： background:transparent;</H3>
+		<h3>css absolute/relative:Absolute（绝对定位）与relative（相对定位）的图文讲解:<br>
+			<a href="https://blog.csdn.net/weixin_42067967/article/details/80152403">详细</a>
+			<br>
+			Absolution：元素会脱离文档流，定位是相对于离它最近的且不是static定位的父元素而言，若该元素没有设置宽度，则宽度由元素里面的内容决定，且宽度不会影响父元素，定位为absolution后，原来的位置相当于是空的，下面的的元素会来占据。
+			<br><br>
+			Relative：元素仍处于文档流中，定位是相对于原本自身的位置，若没有设置宽度，则宽度为父元素的宽度，该元素的大小会影响父元素的大小。
+		</h3>
+		<h3>css 苹果手机上input的button按钮颜色显示问题:在苹果手机上的input按钮自带效果，需要加上outline:0px; -webkit-appearance:none; 清除原有样式</h3>
+		<h3>css outline:outline（轮廓）是绘制于元素周围的一条线，位于边框边缘的外围，可起到突出元素的作用</h3>
+		</div>
+
+		<H3>vue 设置获取ref ：this.$refs['ref名称'].innerHTML</H3> 
+		<H3>vue 组件设置 props的默认值：采用对象写法：props:{name:{defalut:'默认名称'}}</H3>
+		<h3>vue 组件属性传递时：  有时候不加冒号，是因为属性是字符串类型，加冒号是因为属性是 变量或者数字或者布尔类型</h3>
+	</div>
+
+
+
+</div>
+</body>
+<script type="text/javascript">
+	//console.log(confirm("确认删除吗?"))
+
+	// var d=new Date()
+	// console.log(d.getDate()) //14
+	// console.log(d.getFullYear()) //2021
+	// d.getHours()
+	// d.getMinutes()
+	// console.log(d.getTime()) //获取时间戳
+	// console.log(parseInt('dd111'))
+	// console.log(isNaN(parseInt('d')))
+	// console.log(typeof('3'+2))
+	// console.log(isNaN(3))  //如果为fals 说明是数字
+	// document.getElementById("input1").focus()
+	var man=new Vue({ 
+	el:"#main",
+	data:{
+		nno:'123'
+	},
+	methods:{
+		test1(){
+			this.$refs.title2.innerHTML='asddddddd'
+			console.log(this.$refs.title2.innerHTML)
+		}
+	},
+	created(){
+		window.onscroll = () => {
+								      
+			console.log(document.documentElement.scrollHeight)
+			// console.log(document.body.clientHeight)
+			// console.log(document.documentElement.clientHeight)
+
+			// console.log(document.body.scrollTop)
+			// console.log(document.documentElement.scrollTop)
+		}
+		
+	},
+	mounted(){
+		console.log('mounted')
+
+	}
+})
+</script>
+</html>
